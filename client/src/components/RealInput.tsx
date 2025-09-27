@@ -81,11 +81,9 @@ const RealInput = ({ type, name, placeholder,value,onChange,label }: InputField)
         name={name}
         placeholder={placeholder}
         className={`
-          min-w-[100%]
-
           flex items-center
           justify-center
-          sm:w-full
+          w-full
           px-4 py-3
           text-sm sm:text-base
           border-2 border-gray-300
