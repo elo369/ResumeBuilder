@@ -75,7 +75,7 @@ const FrontResume = () => {
   // } = collectData;
 
   return (
-    <div className="flex-col items-center w-[50%] justify-center p-10 bg-gray-100 mt-5 ">
+    <div className="flex-col items-center md:w-[50%] w-full justify-center p-10 bg-gray-100 mt-5 ">
       <div
         ref={componentRef}
         className="w-full  max-w-3xl bg-white text-black p-8 rounded-lg shadow-xl"
