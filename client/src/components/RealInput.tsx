@@ -68,7 +68,7 @@ const RealInput = ({ type, name, placeholder,value,onChange,label }: InputField)
 
   let empty = ""
   return (
-    <div className="flex flex-col w-full max-w-md mx-auto md:p-2 px-4 flex-wrap">
+    <div className="flex flex-col w-full max-w-md mx-auto md:p-2 px-2 flex-wrap">
       <label
         htmlFor={name}
         className="text-lg sm:text-xl font-semibold font-poppins text-gray-800 mb-2"
