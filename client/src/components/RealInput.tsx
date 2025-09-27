@@ -81,7 +81,7 @@ const RealInput = ({ type, name, placeholder,value,onChange,label }: InputField)
         name={name}
         placeholder={placeholder}
         className={`
-          min-w-[108%]
+          min-w-[100%]
           md:w-full
           px-4 py-3
           text-sm sm:text-base
