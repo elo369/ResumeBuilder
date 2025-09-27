@@ -13,7 +13,7 @@ const Hero = () => (
     }}
   >
     <h1 className="text-2xl sm:text-3xl md:text-4xl font-poppins font-bold py-5 text-gray-800 leading-tight flex justify-center">
-   div Build Your Professional Resume in  Minutes <img src="rocket.png" alt="rocket hai" className="md:w-12 md:h-12 hidden md:block" />
+    Build Your Professional Resume in  Minutes <img src="rocket.png" alt="rocket hai" className="md:w-12 md:h-12 hidden md:block" />
   </h1>
   
   <p className="text-sm md:text-lg  font-poppins  font-medium text-gray-600 max-w-2xl  mx-auto">
