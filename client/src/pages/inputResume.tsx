@@ -64,9 +64,9 @@ const InputResume = () => {
           <Project />
         </div>
 
-        <WrapDiv id="TechnicalSkills">
+        <WrapDiv id="Technical Skills">
           <div
-            id="mainTechicalSkills "
+            id="TechnicalSkills "
             className="w-full justify-start md:flex md:grid-cols-none grid grid-cols-1"
           >
             <RealInput

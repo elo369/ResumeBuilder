@@ -7,7 +7,6 @@ const sections = [
   "Education",
   "Experience",
   "Projects",
-  "TechnicalSkills",
   "Achievements",
 ];
 
