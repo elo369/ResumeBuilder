@@ -81,7 +81,7 @@ const RealInput = ({ type, name, placeholder,value,onChange,label }: InputField)
         name={name}
         placeholder={placeholder}
         className={`
-          min-w-[120%]
+          min-w-[100%]
 
           flex items-center
           justify-center
