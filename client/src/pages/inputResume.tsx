@@ -35,7 +35,7 @@ const InputResume = () => {
 
   return (
     <>
-      <button className="w-20 h-7 bg-blue-500 text-white font-bold font-poppins absolute left-5 top-7  rounded-2xl">
+      <button className="block w-20 h-7 bg-blue-500 text-white font-bold font-poppins relative left-5 top-3  rounded-2xl">
         <a href="/">Back</a>
       </button>
       <div className="sticky top-5 right-5 ">
@@ -43,7 +43,7 @@ const InputResume = () => {
           <ResumeSidebar />
         </div>
       </div>
-      <div className="w-full px-20 z-1">
+      <div className="w-full md:px-20 z-1">
         <div id="PersonalInfo">
           <NameInputs />
         </div>
@@ -63,7 +63,7 @@ const InputResume = () => {
         <div id="Projects">
           <Project />
         </div>
-
+<div id="Technical">
         <WrapDiv id="Technical Skills">
           <div
             id="TechnicalSkills "
@@ -95,6 +95,7 @@ const InputResume = () => {
             />
           </div>
         </WrapDiv>
+        </div>
       </div>
     </>
   );
