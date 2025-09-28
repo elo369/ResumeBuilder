@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import logo from "../assets/logo.png"
+import logo from "../assets/logo.png";
+import { Menu, X } from "lucide-react";
+
+
 export const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -11,22 +14,13 @@ export const Navigation = () => {
     { name: "Contact", href: "#contact" },
   ];
 
-  const phoneNumber = "+918530834693"; // Replace with your number
-
-  const handleCall = () => {
-    window.location.href = `tel:${phoneNumber}`;
-  };
-
   return (
     <nav className="fixed top-0 w-full   z-50  animate-fade-in ">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          
-          <div
-            className="flex items-center space-x-2 mt-7"
-          >
+          <div className="flex items-center space-x-2 mt-7">
             <div className="md:w-25 md:h-25 w-15 h-15">
-              <img src={logo} className="bg-transparent rounded-full"/>  
+              <img src={logo} className="bg-transparent rounded-full" />
             </div>
           </div>
 
@@ -54,10 +48,10 @@ export const Navigation = () => {
           <div className="md:hidden">
             <button
               className="ghost"
-            //   size="sm"
-            //   onClick={() => setIsOpen(!isOpen)}
+                // size="sm"
+                onClick={() => setIsOpen(!isOpen)}
             >
-              {/* {isOpen ? <X size={30} /> : <Menu size={30} />} */}
+              {isOpen ? <X size={30} /> : <Menu size={30} />}
             </button>
           </div>
         </div>
@@ -76,16 +70,6 @@ export const Navigation = () => {
                   {item.name}
                 </a>
               ))}
-              <div className="px-4 pt-2">
-                <button
-                  onClick={handleCall}
-                //   variant="default"
-                //   size="sm"
-                  className="w-full"
-                >
-                  <a href="#joinNow">Join Now</a>
-                </button>
-              </div>
             </div>
           </div>
         )}
