@@ -35,7 +35,7 @@ const InputResume = () => {
 
   return (
     <>
-      <button className="block w-20 h-7 bg-blue-500 text-white font-bold font-poppins relative left-5 top-3  rounded-2xl">
+      <button className="block w-20 h-7 bg-blue-500 text-white font-bold font-poppins relative left-5 top-2  rounded-2xl">
         <a href="/">Back</a>
       </button>
       <div className="sticky top-5 right-5 ">
