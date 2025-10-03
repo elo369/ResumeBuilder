@@ -3,22 +3,20 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import { useReactToPrint } from "react-to-print";
 
+// type Projects = {
+//   title: string;
+//   techstack: string;
+//   projectGithub: string;
+//   description: string[];
+// };
 
-type Projects = {
-  title: string;
-  techstack: string;
-  projectGithub: string;
-  description: string[];
-};
-
-type Achievement = {
-  title: string;
-  explan: string;
-};
+// type Achievement = {
+//   title: string;
+//   explan: string;
+// };
 
 const TemplateThree = () => {
-
-    const { collectData }: any = useSelector(
+  const { collectData }: any = useSelector(
     (state: RootState) => state.resumeReducer
   );
 
@@ -26,72 +24,144 @@ const TemplateThree = () => {
 
   // @ts-ignore
   const handlePrint = useReactToPrint({
-   contentRef: componentRef,   // <-- ✅ new API
+    contentRef: componentRef, // <-- ✅ new API
     documentTitle: `${collectData?.personalInfo?.firstName}_Resume`,
     onAfterPrint: () => console.log("Print success!"),
-    onPrintError: (error:any) => console.error("Print error:", error),
+    onPrintError: (error: any) => console.error("Print error:", error),
   });
   console.log("collection", collectData);
   if (!collectData) {
     return <p>No Resume Data Yet. Start Typing!</p>;
   }
   return (
-    <div
-  ref={componentRef}
-  className="w-full max-w-3xl bg-white border border-gray-300 p-8 rounded-lg shadow-md"
->
-  {/* Header */}
-  <header className="border-b-2 border-gray-400 pb-2 mb-4 text-center">
-    <h1 className="text-3xl font-bold text-gray-900">
-      {collectData?.personalInfo?.firstName} {collectData?.personalInfo?.lastName}
-    </h1>
-    <p className="text-sm text-gray-600">
-      {collectData?.personalInfo?.email} | {collectData?.personalInfo?.phoneNumber} | {collectData?.personalInfo?.linkedin}
-    </p>
-  </header>
+    <div className="flex-col items-center md:w-[50%] w-full justify-center p-10 bg-gray-100 mt-5">
+  <div
+    ref={componentRef}
+    className="w-full max-w-3xl bg-white text-gray-900 p-8 rounded-lg shadow-xl"
+  >
+    {/* Centered Name and Contact Info */}
+    <header className="text-center pb-4 mb-4 border-b border-gray-400">
+      <h1 className="text-4xl font-extralight text-black tracking-widest uppercase">
+        {collectData?.personalInfo?.firstName} {collectData?.personalInfo?.lastName}
+      </h1>
+      <div className="flex flex-wrap gap-x-4 gap-y-1 text-sm text-gray-700 mt-3 justify-center">
+        <p>{collectData?.personalInfo?.phoneNumber}</p>
+        <span className="text-gray-400">|</span>
+        <p>{collectData?.personalInfo?.email}</p>
+        <span className="text-gray-400">|</span>
+        <p>LinkedIn: <a href={collectData?.personalInfo?.linkedin} target="_blank" className="text-indigo-600 hover:underline">Profile</a></p>
+        <span className="text-gray-400">|</span>
+        <p>GitHub: <a href={collectData?.personalInfo?.github} target="_blank" className="text-indigo-600 hover:underline">Repo</a></p>
+      </div>
+    </header>
 
-  {/* Education */}
-  <section className="mb-5">
-    <h2 className="text-xl font-bold text-gray-800 border-b pb-1 mb-3">
-      Education
-    </h2>
-    <p className="font-medium">{collectData?.educationData?.education?.degree}</p>
-    <p className="text-sm italic">{collectData?.educationData?.education?.college}</p>
-    <p className="text-sm text-gray-600">{collectData?.educationData?.education?.startDate} – {collectData?.educationData?.education?.endDate}</p>
-  </section>
+    {/* Professional Summary (Optional) */}
+    {/* <section className="mb-6">
+      <p className="text-sm text-center italic text-gray-600">
+        A brief, impactful statement about your professional value.
+      </p>
+    </section> */}
 
-  {/* Research Projects */}
-  <section className="mb-5">
-    <h2 className="text-xl font-bold text-gray-800 border-b pb-1 mb-3">
-      Research Projects
-    </h2>
-    {collectData?.projects?.mostProjects?.map((proj:Projects, idx:number) => (
-      <div key={idx} className="mb-2">
-        <p className="font-semibold">{proj.title}</p>
-        <p className="text-sm text-gray-600">Tech/Methods: {proj.techstack}</p>
-        <ul className="list-disc list-inside text-sm">
-          {proj.description?.map((desc, id) => (
-            <li key={id}>{desc}</li>
+    {/* Experience */}
+    <section className="mb-6">
+      <h2 className="text-xl font-bold border-b-2 border-indigo-600 pb-1 mb-3 text-indigo-600 uppercase">
+        Professional Experience
+      </h2>
+
+      {/* Main Experience */}
+      <div className="mb-4">
+        <div className="flex justify-between items-end">
+          <p className="text-md font-bold text-gray-900">
+            {collectData?.experience?.mainExperience?.jobTitle}
+          </p>
+          <p className="text-sm italic text-gray-600">
+            {collectData?.experience?.mainExperience?.experienceStartDate} -{" "}
+            {collectData?.experience?.mainExperience?.experienceEndDate == null ? "Present" : collectData?.experience?.mainExperience?.experienceEndDate}
+          </p>
+        </div>
+        <p className="text-sm font-medium mb-1">
+          {collectData?.experience?.mainExperience?.company} | {collectData?.experience?.mainExperience?.jobLocation}
+        </p>
+        <ul className="list-disc list-inside text-sm mt-1 space-y-0.5">
+          {collectData?.experience?.mainExperience?.description?.map((expDescription: string, id: number) => (
+            <li key={id}>{expDescription}</li>
           ))}
         </ul>
       </div>
-    ))}
-  </section>
 
-  {/* Publications */}
-  <section>
-    <h2 className="text-xl font-bold text-gray-800 border-b pb-1 mb-3">
-      Publications & Achievements
-    </h2>
-    {collectData?.achievements?.dynamicAchieve?.map((a:Achievement, idx:number) => (
-      <p key={idx} className="text-sm mb-1">
-        • {a.title} — {a.explan}
-      </p>
-    ))}
-  </section>
+      {/* Additional Experiences */}
+      {/* ... (Loop through dynamic experience here) ... */}
+
+    </section>
+
+    {/* Projects */}
+    <section className="mb-6">
+      <h2 className="text-xl font-bold border-b-2 border-indigo-600 pb-1 mb-3 text-indigo-600 uppercase">
+        Select Projects
+      </h2>
+      {/* Main Project */}
+      <div className="mb-4">
+        <p className="font-bold">
+          {collectData?.projects?.mainProject?.projectTitle}
+        </p>
+        <p className="text-sm text-gray-600 mb-1">
+          <span className="font-semibold">Tech Stack:</span> {collectData?.projects?.mainProject?.techstack}
+        </p>
+        <ul className="list-disc list-inside text-sm mt-1 space-y-0.5">
+          {collectData?.projects?.mainProject?.description?.map((desc: string, id: number) => (
+            <li key={id}>{desc}</li>
+          ))}
+        </ul>
+        <a href={collectData?.projects?.mainProject?.projectGithub} target="_blank" className="text-xs text-indigo-600 hover:underline">
+          Project Repository
+        </a>
+      </div>
+      {/* Dynamic Projects */}
+      {/* ... (Loop through dynamic projects here) ... */}
+    </section>
+
+    {/* Technical Skills - Simple List */}
+    <section className="mb-6">
+      <h2 className="text-xl font-bold border-b-2 border-indigo-600 pb-1 mb-3 text-indigo-600 uppercase">
+        Technical Skills
+      </h2>
+      <div className="text-sm space-y-1">
+        <p>
+          <span className="font-bold">Languages:</span> {collectData?.technicalSkills?.language}
+        </p>
+        <p>
+          <span className="font-bold">Frameworks:</span> {collectData?.technicalSkills?.techFameworks}
+        </p>
+        <p>
+          <span className="font-bold">Dev Tools:</span> {collectData?.technicalSkills?.devTools}
+        </p>
+      </div>
+    </section>
+
+    {/* Education */}
+    <section>
+      <h2 className="text-xl font-bold border-b-2 border-indigo-600 pb-1 mb-3 text-indigo-600 uppercase">
+        Education
+      </h2>
+      {/* Education block */}
+      <div className="text-sm">
+        <div className="flex justify-between font-bold text-gray-900">
+          <p>{collectData?.educationData?.education?.college}</p>
+          <p className="font-medium text-gray-600">
+            {collectData?.educationData?.education?.startDate} - {collectData?.educationData?.education?.endDate}
+          </p>
+        </div>
+        <p className="italic text-gray-700">{collectData?.educationData?.education?.degree}</p>
+      </div>
+    </section>
+  </div>
+  <div className="justify-center flex py-4">
+    <button className="h-10 w-45 bg-blue-400 text-black rounded-2xl hover:bg-blue-600 font-bold shadow shadow-black" onClick={handlePrint}>
+      Submit
+    </button>
+  </div>
 </div>
+  );
+};
 
-  )
-}
-
-export default TemplateThree
+export default TemplateThree;

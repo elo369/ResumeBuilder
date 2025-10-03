@@ -3,17 +3,15 @@ import { useSelector } from "react-redux";
 import type { RootState } from "../store/store";
 import { useReactToPrint } from "react-to-print";
 
-
-type Projects = {
-  title: string;
-  techstack: string;
-  projectGithub: string;
-  description: string[];
-};
+// type Projects = {
+//   title: string;
+//   techstack: string;
+//   projectGithub: string;
+//   description: string[];
+// };
 
 const TemplateTwo = () => {
-
-    const { collectData }: any = useSelector(
+  const { collectData }: any = useSelector(
     (state: RootState) => state.resumeReducer
   );
 
@@ -21,61 +19,136 @@ const TemplateTwo = () => {
 
   // @ts-ignore
   const handlePrint = useReactToPrint({
-   contentRef: componentRef,   // <-- ✅ new API
+    contentRef: componentRef, // <-- ✅ new API
     documentTitle: `${collectData?.personalInfo?.firstName}_Resume`,
     onAfterPrint: () => console.log("Print success!"),
-    onPrintError: (error:any) => console.error("Print error:", error),
+    onPrintError: (error: any) => console.error("Print error:", error),
   });
   console.log("collection", collectData);
   if (!collectData) {
     return <p>No Resume Data Yet. Start Typing!</p>;
   }
 
-  
   return (
-    <div
-  ref={componentRef}
-  className="w-full max-w-3xl bg-gradient-to-br from-white via-gray-50 to-gray-100 p-10 rounded-lg shadow-xl"
->
-  {/* Header */}
-  <header className="text-center mb-6">
-    <h1 className="text-4xl font-extrabold text-blue-600">
-      {collectData?.personalInfo?.firstName} {collectData?.personalInfo?.lastName}
-    </h1>
-    <p className="mt-2 text-sm text-gray-700 italic">
-      {collectData?.personalInfo?.email} | {collectData?.personalInfo?.phoneNumber} | {collectData?.personalInfo?.portfolio}
-    </p>
-  </header>
-
-  {/* Projects */}
-  <section className="mb-6">
-    <h2 className="text-2xl font-bold text-gray-800 border-b-4 border-blue-500 pb-1 mb-3">
-      Creative Projects
-    </h2>
-    {collectData?.projects?.mostProjects?.map((proj:Projects, idx:number) => (
-      <div key={idx} className="mb-4">
-        <h3 className="font-semibold text-blue-600">{proj.title}</h3>
-        <p className="text-sm text-gray-600">{proj.techstack}</p>
-        <a href={proj.projectGithub} className="text-sm text-blue-500 underline">View Project</a>
-        <ul className="list-disc list-inside text-sm mt-1">
-          {proj.description?.map((desc, id) => (
-            <li key={id}>{desc}</li>
-          ))}
-        </ul>
+    <div className="flex-col items-center md:w-[50%] w-full justify-center p-10 bg-gray-100 mt-5">
+  <div
+    ref={componentRef}
+    className="w-full max-w-3xl bg-white text-black rounded-lg shadow-xl overflow-hidden"
+  >
+    {/* Header Section with Color Band */}
+    <header className="bg-gray-800 text-white p-6">
+      <h1 className="text-4xl font-light tracking-wider uppercase">
+        {collectData?.personalInfo?.firstName} {collectData?.personalInfo?.lastName}
+      </h1>
+      <p className="text-lg font-semibold text-green-300 mt-1">
+        {collectData?.experience?.mainExperience?.jobTitle || "Professional Title"}
+      </p>
+      <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs mt-3">
+        <p>Email: {collectData?.personalInfo?.email}</p>
+        <p>Phone: {collectData?.personalInfo?.phoneNumber}</p>
+        <p>LinkedIn: <a href={collectData?.personalInfo?.linkedin} target="_blank" className="text-green-300 hover:underline">Link</a></p>
+        <p>GitHub: <a href={collectData?.personalInfo?.github} target="_blank" className="text-green-300 hover:underline">Link</a></p>
       </div>
-    ))}
-  </section>
+    </header>
 
-  {/* Skills */}
-  <section>
-    <h2 className="text-2xl font-bold text-gray-800 border-b-4 border-blue-500 pb-1 mb-3">
-      Design Skills
-    </h2>
-    <p className="text-sm">Tools: {collectData?.technicalSkills?.devTools}</p>
-  </section>
+    <div className="p-6">
+      {/* Experience */}
+      <section className="mb-6">
+        <h2 className="text-xl font-bold border-b-4 border-green-500 pb-1 mb-4 uppercase tracking-wider text-gray-800">
+          Experience
+        </h2>
+
+        {/* Main Experience */}
+        <div className="mb-5">
+          <div className="flex justify-between items-start">
+            <h3 className="text-md font-extrabold text-gray-900">
+              {collectData?.experience?.mainExperience?.jobTitle} - {collectData?.experience?.mainExperience?.company}
+            </h3>
+            <p className="text-sm font-medium text-gray-600">
+              {collectData?.experience?.mainExperience?.experienceStartDate} -{" "}
+              {collectData?.experience?.mainExperience?.experienceEndDate == null ? "Present" : collectData?.experience?.mainExperience?.experienceEndDate}
+            </p>
+          </div>
+          <p className="text-xs italic text-gray-500 mb-2">
+            {collectData?.experience?.mainExperience?.jobLocation}
+          </p>
+          <ul className="list-disc list-inside text-sm space-y-1">
+            {collectData?.experience?.mainExperience?.description?.map((expDescription: string, id: number) => (
+              <li key={id}>{expDescription}</li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Additional Experiences */}
+        {/* ... (Loop through dynamic experience here) ... */}
+      </section>
+
+      {/* Technical Skills - Grouped horizontally */}
+      <section className="mb-6">
+        <h2 className="text-xl font-bold border-b-4 border-green-500 pb-1 mb-4 uppercase tracking-wider text-gray-800">
+          Technical Skills
+        </h2>
+        <div className="text-sm space-y-2">
+          <p>
+            <span className="font-bold text-gray-700 w-24 inline-block">Languages:</span> {collectData?.technicalSkills?.language}
+          </p>
+          <p>
+            <span className="font-bold text-gray-700 w-24 inline-block">Frameworks:</span> {collectData?.technicalSkills?.techFameworks}
+          </p>
+          <p>
+            <span className="font-bold text-gray-700 w-24 inline-block">Dev Tools:</span> {collectData?.technicalSkills?.devTools}
+          </p>
+        </div>
+      </section>
+
+      {/* Education */}
+      <section className="mb-6">
+        <h2 className="text-xl font-bold border-b-4 border-green-500 pb-1 mb-4 uppercase tracking-wider text-gray-800">
+          Education
+        </h2>
+        <div className="text-sm">
+          <div className="flex justify-between font-extrabold text-gray-900">
+            <p>{collectData?.educationData?.education?.college}</p>
+            <p className="font-medium text-gray-600">
+              {collectData?.educationData?.education?.startDate} - {collectData?.educationData?.education?.endDate}
+            </p>
+          </div>
+          <div className="flex justify-between text-gray-700">
+            <p className="italic">{collectData?.educationData?.education?.degree}</p>
+            <p>{collectData?.educationData?.education?.locationInstitution}</p>
+          </div>
+          <ul className="list-disc list-inside text-sm mt-1">
+             <li>{collectData?.educationData?.education?.educationDescription}</li>
+             {/* ... (Loop for extra descriptions) ... */}
+          </ul>
+        </div>
+      </section>
+
+      {/* Projects */}
+      <section>
+        <h2 className="text-xl font-bold border-b-4 border-green-500 pb-1 mb-4 uppercase tracking-wider text-gray-800">
+          Projects
+        </h2>
+        {/* Main Project (Structure is similar to Experience for consistency) */}
+        {/* ... (Loop through projects here) ... */}
+      </section>
+
+      {/* Achievements (or Awards/Certifications) */}
+      <section className="mt-6">
+        <h2 className="text-xl font-bold border-b-4 border-green-500 pb-1 mb-4 uppercase tracking-wider text-gray-800">
+          Achievements
+        </h2>
+        {/* ... (Loop through achievements here) ... */}
+      </section>
+    </div>
+  </div>
+  <div className="justify-center flex py-4">
+    <button className="h-10 w-45 bg-blue-400 text-black rounded-2xl hover:bg-blue-600 font-bold shadow shadow-black" onClick={handlePrint}>
+      Submit
+    </button>
+  </div>
 </div>
+  );
+};
 
-  )
-}
-
-export default TemplateTwo
+export default TemplateTwo;
