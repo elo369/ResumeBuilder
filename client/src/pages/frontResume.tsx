@@ -18,23 +18,6 @@ type Experience = {
   description: string[];
 };
 
-// type DefaultAchieve = {
-//   achievementTitle: string;
-//   achievementDescription: string;
-// };
-
-// type achievementObj = {
-//   defaultAchieve: DefaultAchieve;
-//   dynamicAchieve: Achievement[];
-// };
-
-// type minProject = {
-//   projectTitle: string;
-//   techstack: string;
-//   projectGithub: string;
-//   description: string[];
-// };
-
 type Projects = {
   title: string;
   techstack: string;
@@ -42,10 +25,7 @@ type Projects = {
   description: string[];
 };
 
-// type AllProjects = {
-//   mainProject: minProject;
-//   mostProjects: Projects[];
-// };
+
 const FrontResume = () => {
   const { collectData }: any = useSelector(
     (state: RootState) => state.resumeReducer
@@ -65,14 +45,7 @@ const FrontResume = () => {
     return <p>No Resume Data Yet. Start Typing!</p>;
   }
 
-  // const {
-  //   personalInfo,
-  //   education,
-  //   experience,
-  //   projects,
-  //   technicalSkills,
-  //   achievements,
-  // } = collectData;
+  
 
   return (
     <div className="flex-col items-center md:w-[50%] w-full justify-center p-10 bg-gray-100 mt-5 ">

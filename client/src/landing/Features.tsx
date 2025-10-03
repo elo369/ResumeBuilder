@@ -3,15 +3,15 @@ const Feature = () => (
     <h2 className="text-5xl py-7 flex justify-center font-poppins font-bold bg-gradient-to-b from-black to-blue-900 bg-clip-text text-transparent">
       FEATURES
     </h2>
-    <section className="py-14 px-20 grid md:grid-cols-3 gap-8 text-center realtive inset-0 z-0">
-      <div className="w-60 sm:w-full py-4 px-3 sm:p-10 md:p-16  rounded-xl shadow-lg bg-gradient-to-b from-blue-400 via-blue-500 to-blue-900 text-white justify-center items-center flex-col ">
+    <section className="py-14 sm:px-20 px-2 grid md:grid-cols-3 gap-8 text-center realtive inset-0 z-0">
+      <div className="w-80 sm:w-full py-4 px-3 sm:p-10 md:p-16  rounded-xl shadow-lg bg-gradient-to-b from-blue-400 via-blue-500 to-blue-900 text-white justify-center items-center flex-col ">
         <h3 className="font-semibold text-2xl mb-3 font-poppins">
           ⚡ Live Preview
         </h3>
         <p className="text-base leading-relaxed font-poppins">
           Edit your resume and{" "}
-          <span className="font-semibold ">see changes instantly</span> in a live
-          preview. No more guesswork — what you see is exactly what you’ll
+          <span className="font-semibold ">see changes instantly</span> in a
+          live preview. No more guesswork — what you see is exactly what you’ll
           download. 🎯
         </p>
       </div>
