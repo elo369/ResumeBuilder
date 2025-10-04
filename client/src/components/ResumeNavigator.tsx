@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { motion } from "motion/react";
+// import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 const sections = [
   "PersonalInfo",
   "Education",
@@ -19,11 +20,10 @@ export default function ResumeSidebar() {
         className="  h-7 w-7 rounded-full bg-black flex items-center justify-center absolute right-2 top-2"
         onClick={() => setView(!view)}
       >
-        👇🏻
+        {/* <ArrowDownwardIcon/> */}👇🏻
       </div>
       {view && (
         <motion.div
-        
           transition={{
             duration: 0.9,
             delay: 2,

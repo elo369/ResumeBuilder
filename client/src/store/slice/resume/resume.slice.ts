@@ -5,13 +5,15 @@ import {getResumeData, resumeThunker} from "./resume.thunk";
 interface ResumeState {
     loading:boolean,
     resumeInfoStore:any,
-    collectData:object
+    collectData:object,
+    template:any
 }
 
 let initialState:ResumeState ={
  loading : false,
  resumeInfoStore:null,
- collectData:{}
+ collectData:{},
+ template:null
 }
 
 export const resumeSlice = createSlice({
@@ -20,7 +22,10 @@ export const resumeSlice = createSlice({
     reducers:{
         updateDataResume :(state,action)=>{
           state.collectData = {...state.collectData,...action.payload}
-        }
+        },
+        useTemplate:(state,action)=>{
+          state.template=action.payload
+        }   
     },
     extraReducers:(builder)=>{
     builder.addCase(resumeThunker.pending,(state)=>{
@@ -46,6 +51,6 @@ export const resumeSlice = createSlice({
     }
 })
 
-export const {updateDataResume} = resumeSlice.actions
+export const {updateDataResume,useTemplate} = resumeSlice.actions
 
 export default resumeSlice.reducer
