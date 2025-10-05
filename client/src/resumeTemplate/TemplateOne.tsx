@@ -39,7 +39,7 @@ const TemplateOne = () => {
 
   useEffect(()=>{
     dispatch(useTemplate(template))
-  })
+  },[template])
   return (
     <div onClick={()=>useTempla("TemplateOne")} className="flex-col items-center md:w-[50%] w-full justify-center p-10 bg-gray-100 mt-5 ">
       <div

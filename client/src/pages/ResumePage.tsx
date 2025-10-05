@@ -21,42 +21,45 @@ const ResumePage = () => {
     (state:RootState)=> state.resumeReducer
   )
   console.log(template)
+  console.log("template")
 
+  
   let choose:any;
   switch (template) {
-    case TemplateOne:
+    case "TemplateOne":
       choose = <TemplateOne/>
       break;
-    case TemplateTwo:
+    case "TemplateTwo":
       choose =<TemplateTwo/>
       break;
-    case TemplateThree:
+    case "TemplateThree":
       choose =<TemplateThree/>
       break;
-    case TemplateFour:
+    case "TemplateFour":
       choose =<TemplateFour/>
       break;
-    case TemplateFive:
+    case "TemplateFive":
       choose =<TemplateFive/>
       break;
-    case TemplateSix:
+    case "TemplateSix":
       choose =<TemplateSix/>
       break;
-    case TemplateSeven:
+    case "TemplateSeven":
       choose =<TemplateSeven/>
       break;
-    case TemplateEight:
+    case "TemplateEight":
       choose=<TemplateEight/>
       break;
-    case TemplateNine:
+    case "TemplateNine":
       choose=<TemplateNine/>
       break;
-    case TemplateTen:
+    case "TemplateTen":
       choose=<TemplateTen/>
       break;
     default:choose=<FrontResume/>
       break;
   }
+
   return (
     <div>
       <InputResume/>

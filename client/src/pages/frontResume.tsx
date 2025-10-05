@@ -98,10 +98,12 @@ const FrontResume = () => {
             </div>
             <h2 className="text-md font-semibold ">Relevant Coursework:</h2>
             <ul className="list-disc list-inside text-sm mt-1">
-              <li>
+            { collectData?.educationData?.education?.educationDescription != null &&
+             <li>
                 {collectData?.educationData?.education?.educationDescription}
               </li>
-              {collectData?.educationData?.educationScript?.map(
+            }
+              {collectData?.educationData?.educationScript != null && collectData?.educationData?.educationScript?.map(
                 (extraDescrition: string, idx: number) => (
                   <li key={idx}>{extraDescrition}</li>
                 )
@@ -146,7 +148,7 @@ const FrontResume = () => {
           </div>
 
           {/* Additional Experiences */}
-          {collectData?.experience?.dynamic?.length !== 0 &&
+          {collectData?.experience?.dynamic?.length !== null &&
             collectData?.experience?.dynamic?.map(
               (info: Experience, id: number) => (
                 <div key={id} className="mb-4">

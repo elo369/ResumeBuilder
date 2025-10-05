@@ -41,7 +41,7 @@ const TemplateTwo = () => {
         {collectData?.personalInfo?.firstName} {collectData?.personalInfo?.lastName}
       </h1>
       <p className="text-lg font-semibold text-green-300 mt-1">
-        {collectData?.experience?.mainExperience?.jobTitle || "Professional Title"}
+        {/* {collectData?.experience?.mainExperience?.jobTitle || "Professional Title"} */}
       </p>
       <div className="flex flex-wrap gap-x-4 gap-y-1 text-xs mt-3">
         <p>Email: {collectData?.personalInfo?.email}</p>

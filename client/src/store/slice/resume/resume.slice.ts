@@ -6,14 +6,14 @@ interface ResumeState {
     loading:boolean,
     resumeInfoStore:any,
     collectData:object,
-    template:any
+    template:string
 }
 
 let initialState:ResumeState ={
  loading : false,
  resumeInfoStore:null,
  collectData:{},
- template:null
+ template:""
 }
 
 export const resumeSlice = createSlice({
