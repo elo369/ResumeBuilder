@@ -1,7 +1,8 @@
 import { useRef } from "react";
-import { useSelector } from "react-redux";
-import type { RootState } from "../store/store";
 import { useReactToPrint } from "react-to-print";
+import { useSelector ,useDispatch} from "react-redux";
+import type { AppDispatch, RootState } from "../store/store";
+import { useTemplate } from "../store/slice/resume/resume.slice";
 
 // type Projects = {
 //   title: string;
@@ -29,8 +30,14 @@ const TemplateTwo = () => {
     return <p>No Resume Data Yet. Start Typing!</p>;
   }
 
+    const dispatch = useDispatch<AppDispatch>()
+  
+   const handleSelect = () => {
+      dispatch(useTemplate("TemplateTwo")); // ✅ Redux me set kar dega
+    };
+
   return (
-    <div className="flex-col items-center md:w-[50%] w-full justify-center p-10 bg-gray-100 mt-5">
+    <div onClick={handleSelect} className="flex-col items-center md:w-[50%] w-full justify-center p-10 bg-gray-100 mt-5">
   <div
     ref={componentRef}
     className="w-full max-w-3xl bg-white text-black rounded-lg shadow-xl overflow-hidden"

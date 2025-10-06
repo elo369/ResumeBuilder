@@ -1,6 +1,6 @@
 import type { AppDispatch } from "../store/store";
 import type { RootState } from "../store/store";
-import { useEffect, useRef, useState } from "react";
+import {  useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useReactToPrint } from "react-to-print";
 import {  useTemplate } from "../store/slice/resume/resume.slice";
@@ -16,7 +16,7 @@ import {  useTemplate } from "../store/slice/resume/resume.slice";
 // };
 
 const TemplateOne = () => {
-  const [template,useTempla] = useState<string>("")
+  // const [template,useTempla] = useState<string>("")
   const { collectData }: any = useSelector(
     (state: RootState) => state.resumeReducer
   );
@@ -30,6 +30,7 @@ const TemplateOne = () => {
     onAfterPrint: () => console.log("Print success!"),
     onPrintError: (error: any) => console.error("Print error:", error),
   });
+
   console.log("collection", collectData);
   if (!collectData) {
     return <p>No Resume Data Yet. Start Typing!</p>;
@@ -37,11 +38,12 @@ const TemplateOne = () => {
 
   const dispatch = useDispatch<AppDispatch>()
 
-  useEffect(()=>{
-    dispatch(useTemplate(template))
-  },[template])
+  const handleSelect = () => {
+    dispatch(useTemplate("TemplateOne")); // ✅ Redux me set kar dega
+  };
+
   return (
-    <div onClick={()=>useTempla("TemplateOne")} className="flex-col items-center md:w-[50%] w-full justify-center p-10 bg-gray-100 mt-5 ">
+    <div onClick={handleSelect} className="flex-col items-center md:w-[50%] w-full justify-center p-10 bg-gray-100 mt-5 ">
       <div
         ref={componentRef}
         className="w-full max-w-3xl bg-white text-gray-800 p-8 rounded-lg shadow-xl grid grid-cols-1 md:grid-cols-3 gap-6"

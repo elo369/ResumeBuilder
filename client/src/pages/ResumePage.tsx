@@ -13,9 +13,7 @@ import TemplateNine from '../resumeTemplate/TemplateNine'
 import TemplateTen from '../resumeTemplate/TemplateTen'
 import { useSelector } from 'react-redux'
 import type { RootState } from "../store/store";
-// import { useState } from 'react'
 const ResumePage = () => {
-  // const [template,useTemplate] = useState(null)
 
   const {template} = useSelector(
     (state:RootState)=> state.resumeReducer
@@ -24,48 +22,36 @@ const ResumePage = () => {
   console.log("template")
 
   
-  let choose:any;
+  const renderTemplate = () => {
   switch (template) {
     case "TemplateOne":
-      choose = <TemplateOne/>
-      break;
+      return <TemplateOne/>
     case "TemplateTwo":
-      choose =<TemplateTwo/>
-      break;
+      return <TemplateTwo/>
     case "TemplateThree":
-      choose =<TemplateThree/>
-      break;
+      return <TemplateThree/>
     case "TemplateFour":
-      choose =<TemplateFour/>
-      break;
+      return <TemplateFour/>
     case "TemplateFive":
-      choose =<TemplateFive/>
-      break;
+      return <TemplateFive/>
     case "TemplateSix":
-      choose =<TemplateSix/>
-      break;
+      return <TemplateSix/>
     case "TemplateSeven":
-      choose =<TemplateSeven/>
-      break;
+      return <TemplateSeven/>
     case "TemplateEight":
-      choose=<TemplateEight/>
-      break;
+      return <TemplateEight/>
     case "TemplateNine":
-      choose=<TemplateNine/>
-      break;
+      return <TemplateNine/>
     case "TemplateTen":
-      choose=<TemplateTen/>
-      break;
-    default:choose=<FrontResume/>
-      break;
+      return <TemplateTen/>
+    default:return <FrontResume/>
   }
-
+}
   return (
     <div>
       <InputResume/>
       <div className='flex-col justify-center'>
-        {/* <template/> */}
-        {choose}
+          {renderTemplate()}
             <FrontResume/>
            <TemplateOne/>
            <TemplateThree/>
