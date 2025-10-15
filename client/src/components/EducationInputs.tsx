@@ -3,14 +3,26 @@
 import { useEffect, useState } from "react";
 import WrapDiv from "./WrapDiv";
 import RealInput from "./RealInput";
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../store/store";
 import { updateDataResume } from "../store/slice/resume/resume.slice";
 
 const EducationInputs = () => {
+      
+  const {collectData} = useSelector(
+    (state:RootState)=> (state.resumeReducer)
+  )
+
       const [education,setEducation] = useState<{[key:string]:string}>({})
-      const [edudescript, setEdudescript] = useState<string[]>([""]);
+      const [edudescript, setEdudescript] = useState<string[]>([]);
     
+       useEffect(()=>{
+              if (collectData.educationData.education && Object.keys(education).length == 0 || collectData.educationData.educationScript || Object.keys(edudescript).length == 0) {
+                setEducation(collectData.educationData.education as {[key:string]:string} )
+                setEdudescript(collectData.educationData.educationScript as [] )
+              }
+            },[])
+
        let collectEducation = (e:React.ChangeEvent<HTMLInputElement>)=>{
          setEducation((prev)=>({
             ...prev,
@@ -27,11 +39,13 @@ const EducationInputs = () => {
     let dispatch = useDispatch<AppDispatch>()
 
     useEffect(()=>{
+      if (Object.keys(education).length > 0 || edudescript.length > 0) {
         dispatch(updateDataResume({educationData:educationObj}))
+      }
     },[education,edudescript])
 
   return (
-    <div>
+    <div className="  min-h-[70vh]">
       <WrapDiv id="education">
         <RealInput
           type="text"
@@ -97,21 +111,23 @@ const EducationInputs = () => {
             }}
           />
         ))}
+      </WrapDiv>
+      <div className="flex gap-2 pl-5">
         <button
-          className="h-10 w-10 bg-blue-700 border-amber-200  rounded-md"
+          className="h-10 w-10 bg-blue-700 border-amber-200  rounded-md "
           onClick={() => setEdudescript([...edudescript, ""])}
         >
           +
         </button>
         <button
-          className="h-10 w-10 bg-blue-400 border-amber-200 rounded-md"
+          className="h-10 w-10 bg-blue-400 border-amber-200 rounded-md "
           onClick={() =>
             setEdudescript(edudescript.slice(0, edudescript.length - 1))
           }
         >
           -
         </button>
-      </WrapDiv>
+        </div>
     </div>
   )
 }

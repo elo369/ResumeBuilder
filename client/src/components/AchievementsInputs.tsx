@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import WrapDiv from "./WrapDiv";
 import RealInput from "./RealInput";
-import type { AppDispatch } from "../store/store";
-import { useDispatch } from "react-redux";
+import type { AppDispatch, RootState } from "../store/store";
+import { useDispatch, useSelector } from "react-redux";
 import { updateDataResume } from "../store/slice/resume/resume.slice";
 
  type Achievement = {
@@ -18,13 +18,25 @@ type achievementObj = {
 }
 
 const AchievementsInputs = () => {
+
+  const {collectData} = useSelector(
+    (state:RootState)=> (state.resumeReducer)
+  )
+
      const [mainAchievement,setMainAchievement] = useState<{[key:string]:string}>({})
      const [achievement, setAchievement] = useState<Achievement[]>([
-        {
-          title: "",
-          explan: "",
-        },
+        // {
+        //   title: "",
+        //   explan: "",
+        // },
       ]);
+
+      useEffect(()=>{
+        if (collectData.achievements.defaultAchieve && Object.keys(mainAchievement).length == 0 || collectData.achievements.dynamicAchieve || Object.keys(achievement).length == 0) {
+          setMainAchievement(collectData.achievements.defaultAchieve as {[key:string]:string} )
+          setAchievement(collectData.achievements.dynamicAchieve as Achievement[] )
+        }
+      },[])
 
        let collectAchievement = (e:React.ChangeEvent<HTMLInputElement>)=>{
          setMainAchievement((prev)=>({
@@ -40,14 +52,17 @@ const AchievementsInputs = () => {
 
     let dispatch = useDispatch<AppDispatch>()
 
+
     useEffect(()=>{
+      if (Object.keys(mainAchievement).length > 0 || Object.keys(achievement).length > 0) {    
         dispatch(updateDataResume({achievements:achievementObject}))
+      }
     },[mainAchievement,achievement])
 
     console.log(mainAchievement,achievement)
     
   return (
-    <div>
+    <div className=" min-h-[70vh]">
       <WrapDiv id="Achievements">
         <RealInput
           type="text"
@@ -102,6 +117,7 @@ const AchievementsInputs = () => {
             </div>
           );
         })}
+        <div className="flex gap-2 pl-5">
         <button
           className="h-10 w-10 bg-blue-700 border-amber-200  rounded-md "
           onClick={() =>
@@ -124,6 +140,7 @@ const AchievementsInputs = () => {
         >
           -
         </button>
+        </div>
     </div>
   )
 }

@@ -68,10 +68,10 @@ const RealInput = ({ type, name, placeholder,value,onChange,label }: InputField)
 
   let empty = ""
   return (
-    <div className="flex flex-col w-full max-w-md mx-auto md:p-2 md:pr-0 pr-1 flex-wrap">
+    <div className="flex flex-col w-[60%] max-w-md   flex-wrap">
       <label
         htmlFor={name}
-        className="text-sm sm:text-xl font-semibold font-poppins text-gray-800 mb-2"
+        className="text-sm sm:text-sm font-semibold font-poppins text-gray-800 mb-2"
       >
         { label?.toUpperCase()}{" "}:
       </label>
@@ -82,8 +82,8 @@ const RealInput = ({ type, name, placeholder,value,onChange,label }: InputField)
         placeholder={placeholder}
         className={`
           w-[250px]
-          md:w-full
-          px-4 py-3
+          md:w-[60%]
+          px-4 py-2
           text-sm sm:text-base
           border-2 border-gray-300
           rounded-xl

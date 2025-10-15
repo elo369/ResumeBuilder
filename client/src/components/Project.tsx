@@ -3,8 +3,8 @@
 import { useEffect, useState,  } from "react";
 import RealInput from "./RealInput";
 import WrapDiv from "./WrapDiv";
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../store/store";
+import { useDispatch, useSelector } from "react-redux";
+import type { AppDispatch, RootState } from "../store/store";
 import { updateDataResume } from "../store/slice/resume/resume.slice";
 
 type minProject = {
@@ -29,6 +29,10 @@ type AllProjects = {
 const Project = () => {
   // const [projectDecripe,setProjectDescripe] = useState<string[]>([""]) 
 
+  const {collectData} = useSelector(
+    (state:RootState)=> (state.resumeReducer)
+  )
+
     const [mainProject,setMainProject] = useState<minProject>({
       projectTitle: "",
       techstack: "",
@@ -39,14 +43,21 @@ const Project = () => {
     const [reputableProjectDescripe, setReputableProjectDescripe] = useState<string[]>([""]);
 
     const [mostProjects, setMostProjects] = useState<Projects[]>([
-    {
-      title: "",
-      techstack: "",
-      projectGithub: "",
-      description: [...reputableProjectDescripe],
-    },
+    // {
+    //   title: "",
+    //   techstack: "",
+    //   projectGithub: "",
+    //   description: [...reputableProjectDescripe],
+    // },
   ]);
-// setMostProjects(mostProjects[0].description)
+
+  useEffect(()=>{
+      if (collectData.projects.mainProject && Object.keys(mainProject).length == 0 || collectData.projects.mostProjects  || Object.keys(mostProjects).length == 0) {
+        setMainProject(collectData.projects.mainProject as minProject)
+        setMostProjects(collectData.projects.mostProjects as Projects[] )
+      }
+    },[])
+
     let collectProject = (e:React.ChangeEvent<HTMLInputElement>)=>{
           setMainProject((prev)=>({
             ...prev,
@@ -62,11 +73,13 @@ const Project = () => {
     const dispatch = useDispatch<AppDispatch>()
 
     useEffect(()=>{
-      dispatch(updateDataResume({projects:allProjects}))
+      if (Object.keys(mainProject).length > 0 || Object.keys(mostProjects).length > 0) {
+        dispatch(updateDataResume({projects:allProjects}))
+      }
     },[mainProject,mostProjects])
         
   return (
-    <div>
+    <div className="  min-h-[70vh]">
       <WrapDiv id="project">
         <RealInput
           type="text"
@@ -113,7 +126,7 @@ const Project = () => {
       </WrapDiv>
 
         {mostProjects.map((proj, index) => (
-          <div key={index} className="grid md:grid-cols-2">
+          <WrapDiv key={index} className="grid md:grid-cols-2">
             <RealInput
               type="text"
               name={`projectTitle${index}`}
@@ -187,9 +200,9 @@ const Project = () => {
                 }}
               />
             ))}
-          </div>
+          </WrapDiv>
         ))}
-
+        <div className="flex gap-2 pl-5">
         <button
           className="h-10 w-10 bg-blue-700 border-amber-200 ml-2 rounded-md"
           onClick={() =>
@@ -199,7 +212,7 @@ const Project = () => {
                 title: "",
                 techstack: "",
                 projectGithub: "",
-                description: [],
+                description: [...reputableProjectDescripe],
               },
             ])
           }
@@ -213,6 +226,7 @@ const Project = () => {
         >
           -
         </button>
+        </div>
     </div>
   )
 }

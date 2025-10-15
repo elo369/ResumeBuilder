@@ -4,10 +4,8 @@ let resumeDetail = new Schema({
   personalInfo: {
     firstName: { type: String, required: true },
     lastName: { type: String, required: true },
-    location: { type: String, required: true },
     email: { type: String, required: true },
     phoneNumber: { type: Number, required: true },
-    portfolio: { type: String },
     linkedin: { type: String },
     github: { type: String },
   },

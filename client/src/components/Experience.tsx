@@ -3,8 +3,8 @@
 import { useEffect, useState } from "react";
 import RealInput from "./RealInput";
 import WrapDiv from "./WrapDiv";
-import type { AppDispatch } from "../store/store";
-import { useDispatch } from "react-redux";
+import type { AppDispatch, RootState, } from "../store/store";
+import { useDispatch, useSelector,  } from "react-redux";
 import { updateDataResume } from "../store/slice/resume/resume.slice";
 
 type Experience = {
@@ -29,6 +29,11 @@ type mainExperience = {
 
 const Experience = () => {
   // const [experienceDescripe, setExperienceDescripe] = useState<string[]>([""]);
+  const {collectData} = useSelector(
+    (state:RootState)=> (state.resumeReducer)
+  )
+  let dispatch = useDispatch<AppDispatch>();
+
   const [mainExperience, setMainExperience] = useState<mainExperience>({
     jobTitle: "",
     company: "",
@@ -42,16 +47,42 @@ const Experience = () => {
     useState<string[]>([""]);
 
   const [mostexperience, setMostExperience] = useState<Experience[]>([
-    {
-      jobTitle: "",
-      company: "",
-      startDate: "",
-      endDate: "",
-      // currentlyWorking: "false",
-      jobLocation: "",
-      description: [...reputableExperienceDescripe],
-    },
+    // {
+    //   jobTitle: "",
+    //   company: "",
+    //   startDate: "",
+    //   endDate: "",
+    //   // currentlyWorking: "false",
+    //   jobLocation: "",
+    //   description: [...reputableExperienceDescripe],
+    // },
   ]);
+
+  
+  // let check = (e: React.ChangeEvent<HTMLInputElement>) =>
+  //   setMainExperience((prev) => ({
+  //     ...prev,
+  //     [e.target.name]: e.target.checked ? "true" : "false",
+  //   }));
+  
+  useEffect(()=>{
+    if (collectData.experience.mainExperience && Object.keys(mainExperience).length == 0 || collectData.experience.dynamic  || Object.keys(mostexperience).length == 0) {
+      setMainExperience(collectData.experience.mainExperience as mainExperience)
+      setMostExperience(collectData.experience.dynamic as Experience[] )
+    }
+  },[])
+  
+  let collectExperienceFull = {
+    mainExperience: mainExperience,
+    dynamic: [...mostexperience],
+  };
+
+  useEffect(() => {
+    if (Object.keys(mainExperience).length > 0 || Object.keys(mostexperience).length > 0) {
+      dispatch(updateDataResume({ experience: collectExperienceFull }));
+    }
+    // dispatch(updateDataResume({ experience: collectExperienceFull }));
+  }, [mainExperience, mostexperience]);
 
   let collectExperience = (e: React.ChangeEvent<HTMLInputElement>) =>
     setMainExperience((prev) => ({
@@ -59,27 +90,8 @@ const Experience = () => {
       [e.target.name]: e.target.value,
     }));
 
-  // let check = (e: React.ChangeEvent<HTMLInputElement>) =>
-  //   setMainExperience((prev) => ({
-  //     ...prev,
-  //     [e.target.name]: e.target.checked ? "true" : "false",
-  //   }));
-
-  let collectExperienceFull = {
-    mainExperience: mainExperience,
-    dynamic: [...mostexperience],
-  };
-
-  let dispatch = useDispatch<AppDispatch>();
-
-  console.log(mainExperience.description)
-  useEffect(() => {
-    dispatch(updateDataResume({ experience: collectExperienceFull }));
-  }, [mainExperience, mostexperience]);
-
-  console.log(mainExperience.description)
   return (
-    <div>
+    <div className="  md:min-h-[70vh] bg-amber-300">
       <WrapDiv id="experience">
         <RealInput
           type="text"
@@ -152,7 +164,7 @@ const Experience = () => {
         ))}
       </WrapDiv>
       { mostexperience.map((exp, index) => (
-        <div key={index} className="grid md:grid-cols-2  p-4 my-2">
+        <WrapDiv key={index} className="grid md:grid-cols-2   ">
           <RealInput
             type="text"
             name={`company${index}`}
@@ -262,11 +274,11 @@ const Experience = () => {
               }}
             />
           ))}
-        </div>
+        </WrapDiv>
       ))}
-
+      <div className="flex gap-2 pl-5">
       <button
-        className="h-10 w-10 bg-blue-700 border-amber-200 m-2 rounded-md"
+        className="h-10 w-10 bg-blue-700 border-amber-200  rounded-md"
         onClick={() =>
           setMostExperience([
             ...mostexperience,
@@ -277,7 +289,7 @@ const Experience = () => {
               endDate: "",
               // currentlyWorking: "false",
               jobLocation: "",
-              description: [],
+              description: [...reputableExperienceDescripe],
             },
           ])
         }
@@ -291,6 +303,7 @@ const Experience = () => {
       >
         -
       </button>
+      </div>
     </div>
   );
 };

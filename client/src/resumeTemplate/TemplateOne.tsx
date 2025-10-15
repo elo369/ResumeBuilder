@@ -43,7 +43,7 @@ const TemplateOne = () => {
   };
 
   return (
-    <div onClick={handleSelect} className="flex-col items-center md:w-[50%] w-full justify-center p-10 bg-gray-100 mt-5 ">
+    <div onClick={handleSelect} className="flex-col items-center  md:w-[90%] w-full justify-center    bg-gray-100 mt-5 ">
       <div
         ref={componentRef}
         className="w-full max-w-3xl bg-white text-gray-800 p-8 rounded-lg shadow-xl grid grid-cols-1 md:grid-cols-3 gap-6"

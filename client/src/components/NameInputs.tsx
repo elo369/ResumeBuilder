@@ -3,30 +3,42 @@
 import { useEffect, useState } from "react"
 import RealInput from "./RealInput"
 import WrapDiv from "./WrapDiv"
-import { useDispatch } from "react-redux"
-import type { AppDispatch } from "../store/store"
+import { useDispatch, useSelector,  } from "react-redux"
+import type { AppDispatch, RootState,  } from "../store/store"
 import { updateDataResume } from "../store/slice/resume/resume.slice"
 
 
 const NameInputs = () => {
+   const {collectData} = useSelector(
+    (state:RootState)=>(state.resumeReducer)
+   )
+   let dispatch = useDispatch<AppDispatch>()
     const [name,setName] = useState<{[key:string]:string}>({})
 
-    let collectName = (e:React.ChangeEvent<HTMLInputElement>)=>{
-         setName((prev)=>({
-            ...prev,
-            [e.target.name] : e.target.value
-         }))
+   // ✅ 1. Load existing data only once on mount
+  useEffect(() => {
+    if (collectData?.personalInfo && Object.keys(name).length === 0) {
+      setName(collectData.personalInfo as { [key: string]: string });
     }
+  }, []); // run once only
 
-    let dispatch = useDispatch<AppDispatch>()
+  // ✅ 2. Update Redux when local name changes
+  useEffect(() => {
+    if (Object.keys(name).length > 0) {
+      dispatch(updateDataResume({ personalInfo: name }));
+    }
+  }, [name]);
 
-    console.log(name)
-    useEffect(()=>{
-        dispatch(updateDataResume({personalInfo:name}))
-    },[name])
+  // ✅ 3. Input handler
+  const collectName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setName((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
+  };
     
   return (
-    <div>
+    <div className="  min-h-[70vh]">
       <WrapDiv id="PersonalInfo" class="Personal Information">
         <RealInput
           type="text"
