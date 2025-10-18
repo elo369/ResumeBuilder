@@ -68,7 +68,9 @@ const RealInput = ({ type, name, placeholder,value,onChange,label }: InputField)
 
   let empty = ""
   return (
+    <>
     <div className="flex flex-col w-[60%] max-w-md   flex-wrap">
+    {/* <div className=" w-[60%]    grid  grid-row-2"> */}
       <label
         htmlFor={name}
         className="text-sm sm:text-sm font-semibold font-poppins text-gray-800 mb-2"
@@ -95,6 +97,7 @@ const RealInput = ({ type, name, placeholder,value,onChange,label }: InputField)
         onChange={onChange}
       />
     </div>
+    </>
   );
 };
 

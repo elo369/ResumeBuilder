@@ -261,7 +261,7 @@ const FrontResume = () => {
               (dynamicObj: Achievement, idx: number) => (
                 <div key={idx} className="mt-2">
                   <p className="font-medium">{dynamicObj?.title}</p>
-                  <p className="text-sm  text-wrap break-words  inline">{dynamicObj?.explan}</p>
+                  <p className="font-extralight  text-wrap break-words  mt-1">{dynamicObj?.explan}</p>
                 </div>
               )
             )}

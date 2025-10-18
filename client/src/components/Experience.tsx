@@ -91,7 +91,7 @@ const Experience = () => {
     }));
 
   return (
-    <div className="  md:min-h-[70vh] bg-amber-300">
+    <div className="  md:min-h-[70vh] ">
       <WrapDiv id="experience">
         <RealInput
           type="text"
