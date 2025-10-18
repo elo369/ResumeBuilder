@@ -83,7 +83,7 @@ const ResumePage = () => {
         <div className="w-full min-h-screen">
           <InputResume />
         </div>
-        <div className="flex-col justify-end md:w-[44%] w-full md:absolute md:right-0 p-1 rounded-2xl bg-gradient-to-t from-white to-blue-900 ">
+        <div className="flex-col justify-end md:w-[44%] w-full md:absolute relative md:right-0 p-1 rounded-2xl bg-gradient-to-t from-white to-blue-900 ">
           {choose == "" ? (
             <h1 className="text-lg font-bold text-black items-center ">
               Select Resume
@@ -104,9 +104,9 @@ const ResumePage = () => {
            <TemplateTen/> */}
         </div>
       </div>
-      <div className="top-4 relative">
+      <div className="top-4 relative" >
       <h1 className="pl-5 font-bold text-lg ">Choose One ⬇</h1>
-      <div className="grid grid-cols-2 md:grid-cols-3 md:mt-15">
+      <div className="grid grid-cols-2 md:grid-cols-3 md:mt-15 relative">
         {resumeImage.map((resumeImg, idx: number) => (
           <div
             key={idx}

@@ -51,7 +51,7 @@ const FrontResume = () => {
     <div className="flex-col items-center  md:w-[90%] w-full justify-center  bg-gray-100 mt-5 ">
       <div
         ref={componentRef}
-        className="w-full  max-w-3xl bg-white text-black p-8 rounded-lg shadow-xl"
+        className="  max-w-3xl bg-white text-black p-8 rounded-lg shadow-xl "
       >
         {/* Name + Contact */}
         <header className=" pb-3 mb-1">
@@ -97,10 +97,10 @@ const FrontResume = () => {
               </p>
             </div>
             <h2 className="text-md font-semibold ">Relevant Coursework:</h2>
-            <ul className="list-disc list-inside text-sm mt-1">
+            <ul className="list-disc list-inside text-sm mt-1 ">
             { collectData?.educationData?.education?.educationDescription != null &&
-             <li>
-                {collectData?.educationData?.education?.educationDescription}
+             <li className="font-medium  text-wrap break-words pr-2  inline">
+               {collectData?.educationData?.education?.educationDescription}
               </li>
             }
               {collectData?.educationData?.educationScript != null && collectData?.educationData?.educationScript?.map(
@@ -141,7 +141,7 @@ const FrontResume = () => {
             <ul className="list-disc list-inside text-sm mt-1">
               {collectData?.experience?.mainExperience?.description?.map(
                 (expDescription: string, id: number) => (
-                  <li key={id}>{expDescription}</li>
+                  <div key={id} className="font-medium  text-wrap break-words mt-1">{expDescription}</div>
                 )
               )}
             </ul>
@@ -165,7 +165,7 @@ const FrontResume = () => {
                   <ul className="list-disc list-inside text-sm mt-1">
                     {info.description?.map(
                       (expDescription: string, idx: number) => (
-                        <li key={idx}>{expDescription}</li>
+                        <div key={idx} className="font-medium  text-wrap break-words  mt-1">{expDescription}</div>
                       )
                     )}
                   </ul>
@@ -196,7 +196,7 @@ const FrontResume = () => {
             <ul className="list-disc list-inside text-sm mt-1">
               {collectData?.projects?.mainProject?.description?.map(
                 (desc: string, id: number) => (
-                  <li key={id}>{desc}</li>
+                  <div key={id} className="font-medium  text-wrap break-words  mt-1">{desc}</div>
                 )
               )}
             </ul>
@@ -217,7 +217,7 @@ const FrontResume = () => {
                 <ul className="list-disc list-inside text-sm mt-1">
                   {dynamicProjects?.description?.map(
                     (desc: string, id: number) => (
-                      <li key={id}>{desc}</li>
+                      <div key={id} className="font-medium  text-wrap break-words  mt-1">{desc}</div>
                     )
                   )}
                 </ul>
@@ -261,7 +261,7 @@ const FrontResume = () => {
               (dynamicObj: Achievement, idx: number) => (
                 <div key={idx} className="mt-2">
                   <p className="font-medium">{dynamicObj?.title}</p>
-                  <p className="text-sm">{dynamicObj?.explan}</p>
+                  <p className="text-sm  text-wrap break-words  inline">{dynamicObj?.explan}</p>
                 </div>
               )
             )}
