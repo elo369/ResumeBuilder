@@ -80,7 +80,7 @@ const ResumePage = () => {
   return (
     <div>
       <div className="md:flex flex-col ">
-        <div className=" min-h-screen bg-amber-300 w-[80%]">
+        <div className=" min-h-screen w-[80%]">
           <InputResume />
         </div>
         <div className="flex-col justify-end md:w-[44%] w-full md:relative relative md:right-0 p-1 rounded-2xl bg-gradient-to-t from-white to-blue-900 ">

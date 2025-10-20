@@ -1,17 +1,48 @@
-const Testimonials = () => (
-  <section className="py-16 px-6 text-center">
-    <h2 className="text-3xl font-bold mb-8">What Our Users Say</h2>
-    <div className="grid md:grid-cols-2 gap-6">
-      <div className="p-6 border rounded-lg shadow-sm">
-        <p>"Best resume builder ever! Got my first job interview in a week."</p>
-        <span className="font-semibold">– Rohit, Developer</span>
-      </div>
-      <div className="p-6 border rounded-lg shadow-sm">
-        <p>"Clean templates and easy to use. Saved me so much time."</p>
-        <span className="font-semibold">– Priya, Designer</span>
-      </div>
-    </div>
-  </section>
-)
-
-export default Testimonials
+import { AnimatedTestimonials } from "../components/ui/animated-testimonials";
+ 
+export default  function AnimatedTestimonialsDemo() {
+  const testimonials = [
+    {
+      quote:
+        "The attention to detail and innovative features have completely transformed our workflow. This is exactly what we've been looking for.",
+      name: "Sarah Chen",
+      designation: "Student",
+      src: "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?q=80&w=3560&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      quote:
+        "Implementation was seamless and the results exceeded our expectations. The platform's flexibility is remarkable.",
+      name: "Michael Rodriguez",
+      designation: "Student",
+      src: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      quote:
+        "This solution has significantly improved our team's productivity. The intuitive interface makes complex tasks simple.",
+      name: "Emily Watson",
+      designation: "Student",
+      src: "https://images.unsplash.com/photo-1623582854588-d60de57fa33f?q=80&w=3540&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      quote:
+        "Outstanding support and robust features. It's rare to find a product that delivers on all its promises.",
+      name: "James Kim",
+      designation: "Student",
+      src: "https://images.unsplash.com/photo-1636041293178-808a6762ab39?q=80&w=3464&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      quote:
+        "The scalability and performance have been game-changing for our organization. Highly recommend to any growing business.",
+      name: "Lisa Thompson",
+      designation: "Student",
+      src: "https://images.unsplash.com/photo-1624561172888-ac93c696e10c?q=80&w=2592&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+  ];
+  return (<>
+  <h2 className="text-5xl py-7 flex justify-center font-poppins font-bold bg-gradient-to-b from-black to-blue-900 bg-clip-text text-transparent">
+      Testimonials
+    </h2>
+  <AnimatedTestimonials testimonials={testimonials} />
+  </>
+  )
+}
