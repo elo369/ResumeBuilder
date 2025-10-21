@@ -51,7 +51,7 @@ const FrontResume = () => {
     <div className="flex-col items-center  md:w-[90%] w-full justify-center  bg-gray-100 mt-5 ">
       <div
         ref={componentRef}
-        className="  max-w-3xl bg-white text-black p-8 rounded-lg shadow-xl "
+        className="  resume-page no-print-shadow max-w-3xl bg-white text-black p-8 rounded-lg shadow-xl mx-auto "
       >
         {/* Name + Contact */}
         <header className=" pb-3 mb-1">
